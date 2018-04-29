@@ -1,0 +1,39 @@
+<form>
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>登录：</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-input-container hintLabel="必填项" class="full-width">
+        <!--<span matPrefix="">你好</span>-->
+        <input matInput type="text" placeholder="您的email">
+        <!--<span matSuffix="">@gmail.com</span>-->
+      </mat-input-container>
+      <mat-input-container class="full-width">
+        <input matInput type="password" placeholder="您的密码">
+      </mat-input-container>
+      <button mat-button mat-flat-button type="button">登录</button>
+    </mat-card-content>
+    <mat-card-actions class="text-right">
+      <p>还没有帐户？<a href="#">注册新用户</a></p>
+      <p>忘记密码？<a href="#">找回密码</a></p>
+    </mat-card-actions>
+  </mat-card>
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>
+        每日佳句
+      </mat-card-title>
+      <mat-card-subtitle>
+        知识就是力量，不满足，不放弃。
+      </mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image src="../../../assets/img/quote_fallback.jpg" alt="">
+    <mat-card-content>
+      <!--当这里内容过多，如何自动滚动，待解决-->
+      The allows you to associate error messages with your matInput.
+      By default, these error messages are shown when the control.
+    </mat-card-content>
+
+  </mat-card>
+</form>

@@ -1,0 +1,25 @@
+mat-card{
+  //width: 20em;
+  //margin: 5px;
+  height: 25em;
+  flex: 0 0 20em;
+}
+form{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+.text-right {
+  margin: 5px;
+  text-align: end;
+}
+//#verse {
+//  overflow-y: auto!important;
+//  height: 300px!important;
+//}不行
+//mat-card-content{
+//  overflow-y: auto!important;
+//} 不行
