@@ -7,7 +7,11 @@ export const loadSvgResources = (ir: MatIconRegistry, ds: DomSanitizer) => {
   const daysDir = `${imgDir}/days`;
   const avatarDir = `${imgDir}/avatar`;
 
+  // ir.addSvgIcon('add', ds.bypassSecurityTrustResourceUrl(`${imgDir}/icons/add.svg`));
+  ir.addSvgIcon('unassigned', ds.bypassSecurityTrustResourceUrl(`${avatarDir}/unassigned.svg`));
+  ir.addSvgIcon('move', ds.bypassSecurityTrustResourceUrl(`${imgDir}/icons/move.svg`));
   ir.addSvgIcon('add', ds.bypassSecurityTrustResourceUrl(`${imgDir}/icons/add.svg`));
+  ir.addSvgIcon('delete', ds.bypassSecurityTrustResourceUrl(`${imgDir}/icons/delete.svg`));
   ir.addSvgIcon('day', ds.bypassSecurityTrustResourceUrl(`${sidebarDir}/day.svg`));
   ir.addSvgIcon('month', ds.bypassSecurityTrustResourceUrl(`${sidebarDir}/month.svg`));
   ir.addSvgIcon('project', ds.bypassSecurityTrustResourceUrl(`${sidebarDir}/project.svg`));
