@@ -8,10 +8,12 @@ import {loadSvgResources} from '../utils/svg.util';
 import {SharedModule} from '../shared/shared.module';
 import {MatIconRegistry} from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import 'hammerjs';
+import {RouterModule} from '@angular/router';
 
 @NgModule({
   imports: [
-    HttpClientModule, SharedModule, BrowserAnimationsModule
+    HttpClientModule, SharedModule, BrowserAnimationsModule, RouterModule
   ],
   exports: [
     HeaderComponent, FooterComponent, HttpClientModule, SharedModule, SidebarComponent
