@@ -10,6 +10,7 @@ import {MatIconRegistry} from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import 'hammerjs';
 import {RouterModule} from '@angular/router';
+import 'rxjs/add/operator/take';
 
 @NgModule({
   imports: [

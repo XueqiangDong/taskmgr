@@ -21,6 +21,7 @@ export class TaskHomeComponent implements OnInit {
   lists = [
     {
       id: 1,
+      order: 1,
       name: '代办',
       tasks: [
         {
@@ -52,6 +53,7 @@ export class TaskHomeComponent implements OnInit {
     },
     {
       id: 2,
+      order: 2,
       name: '进行中',
       tasks: [
         {
@@ -105,14 +107,35 @@ export class TaskHomeComponent implements OnInit {
     diaglogRef.afterClosed().subscribe(result => console.log(result));
   }
 
-  launchEditListDialog(){
+  launchEditListDialog() {
     const diaglogRef = this.dialog.open(NewTaskListComponent, {data: {title: '更改列表：'}});
     diaglogRef.afterClosed().subscribe(result => console.log(result));
   }
 
-  launchNewListDialog(){
+  launchNewListDialog() {
     const diaglogRef = this.dialog.open(NewTaskListComponent, {data: {title: '新建列表：'}});
     diaglogRef.afterClosed().subscribe(result => console.log(result));
+  }
+
+  handleMove(srcData, list) {
+    switch (srcData.tag) {
+      case 'task-item':
+        console.log('handling item');
+        break;
+      case 'task-list':
+        console.log('handling list');
+        let srcList = srcData.data;
+        let tempOrder = srcList.order;
+        srcList.order = list.order;
+        list.order = tempOrder;
+        break;
+      default:
+        break;
+    }
+  }
+
+  handleQuickTask(desc: string){
+    console.log(desc);
   }
 
 }
