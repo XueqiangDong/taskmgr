@@ -20,6 +20,9 @@
         [useSvgIcon]="true" [cols]="7" [title]="'选择头像'"
         [items]="items" formControlName="avatar">
       </app-image-list-select>
+      <div>
+        <app-age-input formControlName="dateOfBirth"></app-age-input>
+      </div>
       <button mat-button mat-flat-button type="submit">注册</button>
     </mat-card-content>
     <mat-card-actions class="text-right">

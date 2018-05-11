@@ -26,14 +26,13 @@
         每日佳句
       </mat-card-title>
       <mat-card-subtitle>
-        知识就是力量，不满足，不放弃。
+        {{quote.cn}}
       </mat-card-subtitle>
     </mat-card-header>
-    <img mat-card-image src="../../../assets/img/quote_fallback.jpg" alt="">
+    <img mat-card-image [src]="quote.pic" alt="quote img">
     <mat-card-content>
       <!--当这里内容过多，如何自动滚动，待解决-->
-      The allows you to associate error messages with your matInput.
-      By default, these error messages are shown when the control.
+      {{quote.en}}
     </mat-card-content>
 
   </mat-card>

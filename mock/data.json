@@ -1,0 +1,40 @@
+{
+  "quotes":[
+    {
+      "id": "0",
+      "cn": "今日名言的第一个说法0",
+      "en": "0 Angular is a platform and framework for. Angular is itself written in TypeScript.",
+      "pic": "/assets/img/quotes/0.jpg"
+    },
+    {
+      "id": "1",
+      "cn": "今日名言的第一个说法1",
+      "en": "1 Angular is a platform and framework for. Angular is itself written in TypeScript.",
+      "pic": "/assets/img/quotes/1.jpg"
+    },
+    {
+      "id": "2",
+      "cn": "今日名言的第一个说法2",
+      "en": "2 Angular is a platform and framework for. Angular is itself written in TypeScript.",
+      "pic": "/assets/img/quotes/2.jpg"
+    },
+    {
+      "id": "3",
+      "cn": "今日名言的第一个说法3",
+      "en": "3 Angular is a platform and framework for. Angular is itself written in TypeScript.",
+      "pic": "/assets/img/quotes/3.jpg"
+    },
+    {
+      "id": "4",
+      "cn": "今日名言的第一个说法4",
+      "en": "4 Angular is a platform and framework for. Angular is itself written in TypeScript.",
+      "pic": "/assets/img/quotes/4.jpg"
+    },
+    {
+      "id": "5",
+      "cn": "今日名言的第一个说法5",
+      "en": "5 Angular is a platform and framework for. Angular is itself written in TypeScript.",
+      "pic": "/assets/img/quotes/5.jpg"
+    }
+  ]
+}

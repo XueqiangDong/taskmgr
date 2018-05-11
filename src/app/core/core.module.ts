@@ -2,7 +2,7 @@ import {NgModule, Optional, SkipSelf} from '@angular/core';
 import {HeaderComponent} from './header/header.component';
 import {FooterComponent} from './footer/footer.component';
 import {SidebarComponent} from './sidebar/sidebar.component';
-import {HttpClientModule} from '@angular/common/http';
+import {HttpModule} from '@angular/http';
 import {DomSanitizer} from '@angular/platform-browser';
 import {loadSvgResources} from '../utils/svg.util';
 import {SharedModule} from '../shared/shared.module';
@@ -11,16 +11,25 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import 'hammerjs';
 import {RouterModule} from '@angular/router';
 import 'rxjs/add/operator/take';
+import {HttpClientModule} from '@angular/common/http';
+import '../utils/debug.util';
 
 @NgModule({
   imports: [
-    HttpClientModule, SharedModule, BrowserAnimationsModule, RouterModule
+    HttpModule, SharedModule, BrowserAnimationsModule, RouterModule, HttpClientModule
   ],
   exports: [
-    HeaderComponent, FooterComponent, HttpClientModule, SharedModule, SidebarComponent
+    HeaderComponent, FooterComponent, HttpModule, SharedModule, SidebarComponent, HttpClientModule
   ],
   declarations: [HeaderComponent, FooterComponent, SidebarComponent
   ],
+  providers:[
+    {
+      provide: 'BASE_CONFIG', useValue: {
+        uri: 'http://localhost:3000'
+      }
+    }
+  ]
 })
 export class CoreModule {
   constructor(@Optional() @SkipSelf() parent: CoreModule,

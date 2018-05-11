@@ -9,6 +9,7 @@ import {LoginModule} from './login/login.module';
 import {ProjectModule} from './project/project.module';
 import {MatDialog} from '@angular/material';
 import {TaskModule} from './task/task.module';
+import {QuoteService} from './services/quote.service';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,7 @@ import {TaskModule} from './task/task.module';
     LoginModule, ProjectModule,
     TaskModule, BrowserAnimationsModule,
   ],
-  providers: [MatDialog,
+  providers: [MatDialog, QuoteService
   ],
   bootstrap: [AppComponent]
 })
