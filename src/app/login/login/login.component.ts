@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
 
   onSubmit({value, valid}, ev: Event) {
     ev.preventDefault();
-    console.log(`${JSON.stringify(value)},${valid}`);
+    // console.log(`${JSON.stringify(value)},${valid}`);
   }
 
   validator(c: FormControl): { [key: string]: any } {

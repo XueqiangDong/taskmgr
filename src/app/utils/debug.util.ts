@@ -11,7 +11,7 @@ Observable.prototype.debug = function (message: string) {
   return this.do(
     (next) => {
       if (!environment.production) {
-        console.log(message, next);
+        // console.log(message, next);
       }
     },
     (err) => {
@@ -21,7 +21,7 @@ Observable.prototype.debug = function (message: string) {
     },
     () => {
       if (!environment.production) {
-        console.log(message, 'complete');
+        // console.log(message, 'complete');
       }
     }
   );
