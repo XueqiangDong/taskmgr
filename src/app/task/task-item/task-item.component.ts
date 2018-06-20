@@ -1,5 +1,6 @@
-import {Component, EventEmitter, HostListener, Input, OnInit, Output, ChangeDetectionStrategy} from '@angular/core';
-import {itemAnim} from '../../anims/item.anim';
+import {ChangeDetectionStrategy, Component, EventEmitter, HostListener, Input, OnInit, Output} from '@angular/core';
+import {itemAnim} from '../../anim';
+import {TaskVM} from '../../vm';
 
 @Component({
   selector: 'app-task-item',
@@ -12,33 +13,39 @@ import {itemAnim} from '../../anims/item.anim';
 })
 export class TaskItemComponent implements OnInit {
 
-  @Input() item;
-  @Input() avatar;
-  @Output() taskClick = new EventEmitter<void>();
+  @Output() taskComplete = new EventEmitter();
+  @Output() taskClick = new EventEmitter();
+  @Input() item: TaskVM;
+  avatar: string;
   widerPriority = 'in';
 
   constructor() {
   }
 
   ngOnInit() {
-    this.avatar = this.item.owner ? this.item.owner.avatar : 'unassigned';
+    this.avatar = (this.item.owner) ? <string>this.item.owner.avatar : 'unassigned';
   }
 
-  onItemClick() {
+  onCheckboxClick(ev: Event) {
+    ev.stopPropagation();
+  }
+
+  checkboxChanged() {
+    this.taskComplete.emit();
+  }
+
+  itemClicked(ev: Event) {
+    ev.preventDefault();
     this.taskClick.emit();
   }
 
-  onCheckBoxClick(event: Event) {
-    event.stopPropagation();
-  }
-
   @HostListener('mouseenter')
-  onMouseEnter() {
+  handleMouseEnter() {
     this.widerPriority = 'out';
   }
 
   @HostListener('mouseleave')
-  onMouseLeave() {
+  handleMouseLeave() {
     this.widerPriority = 'in';
   }
 

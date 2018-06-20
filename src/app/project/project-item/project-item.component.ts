@@ -1,5 +1,14 @@
-import {Component, OnInit, Input, Output, EventEmitter, HostBinding, HostListener, ChangeDetectionStrategy} from '@angular/core';
-import {cardAnim} from '../../anims/card.anim';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  HostBinding,
+  HostListener,
+  Input,
+  Output
+} from '@angular/core';
+import {cardAnim} from '../../anim';
+import {Project} from '../../domain';
 
 @Component({
   selector: 'app-project-item',
@@ -10,19 +19,14 @@ import {cardAnim} from '../../anims/card.anim';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ProjectItemComponent implements OnInit {
+export class ProjectItemComponent {
 
-  @Input() item;
-  @Output() onInvite = new EventEmitter<void>();
-  @Output() onEdit = new EventEmitter<void>();
-  @Output() onDel = new EventEmitter<void>();
+  @Input() item: Project;
+  @Output() itemSelected = new EventEmitter<void>();
+  @Output() launchUpdateDialog = new EventEmitter<void>();
+  @Output() launchInviteDailog = new EventEmitter<void>();
+  @Output() launchDeleteDailog = new EventEmitter<void>();
   @HostBinding('@card') cardState = 'out';
-
-  constructor() {
-  }
-
-  ngOnInit() {
-  }
 
   @HostListener('mouseenter')
   onMouseEnter() {
@@ -34,16 +38,29 @@ export class ProjectItemComponent implements OnInit {
     this.cardState = 'out';
   }
 
-  onInviteClick() {
-    this.onInvite.emit();
+  onClick(ev: Event) {
+    ev.preventDefault();
+    this.itemSelected.emit();
   }
 
-  onEditClick() {
-    this.onEdit.emit();
+  openUpdateDialog(ev: Event) {
+    ev.preventDefault();
+    ev.stopPropagation();
+    this.launchUpdateDialog.emit();
   }
 
-  onDelete() {
-    this.onDel.emit();
+  openInviteDialog(ev: Event) {
+    ev.preventDefault();
+    ev.stopPropagation();
+    this.launchInviteDailog.emit();
   }
+
+  openDeleteDialog(ev: Event) {
+    ev.preventDefault();
+    ev.stopPropagation();
+    this.launchDeleteDailog.emit();
+  }
+
+  constructor() {}
 
 }

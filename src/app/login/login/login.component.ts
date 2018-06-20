@@ -1,7 +1,11 @@
 import { Component, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {QuoteService} from '../../services/quote.service';
-import {Quote} from '../../domain/quote.model';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Quote} from '../../domain';
+import {Observable} from 'rxjs/Observable';
+import {select, Store} from '@ngrx/store';
+import * as fromRoot from '../../reducers';
+import * as authActions from '../../actions/auth.action';
+import * as actions from '../../actions/quote.action';
 
 @Component({
   selector: 'app-login',
@@ -12,40 +16,28 @@ import {Quote} from '../../domain/quote.model';
 export class LoginComponent implements OnInit {
 
   form: FormGroup;
-  quote: Quote = {
-    cn: '默认是：',
-    en: 'ewtt',
-    pic: '/assets/img/quote_fallback.jpg',
-  };
+  quote$: Observable<Quote>;
 
-  constructor(protected fb: FormBuilder, protected quoteService$: QuoteService) {
-    this.quoteService$.getQuote().subscribe(q => this.quote = q);
+  constructor(protected fb: FormBuilder,
+              protected store$: Store<fromRoot.State>) {
+    this.quote$ = this.store$.pipe(select(fromRoot.getQuoteState));
   }
 
   ngOnInit() {
     this.form = this.fb.group({
-      email: ['wan@lol.com', Validators.compose([Validators.required, Validators.email, this.validator])],
-      password: ['', Validators.required]
+      email: ['wpcfan@163.com', Validators.compose([Validators.required, Validators.email])],
+      password: ['wp123456', Validators.required]
     });
+    this.store$.dispatch({type: actions.QUOTE});
   }
 
-  onSubmit({value, valid}, ev: Event) {
-    ev.preventDefault();
-    // console.log(`${JSON.stringify(value)},${valid}`);
-  }
-
-  validator(c: FormControl): { [key: string]: any } {
-    if (!c.value) {
-      return null;
+  onSubmit({value, valid}: FormGroup, e: Event) {
+    e.preventDefault();
+    if (!valid) {
+      return;
     }
-    const pattern = /^wang+/;
-    if (pattern.test(c.value)) {
-      return null;
-    } else {
-      return {
-        emailNotValid: 'The email not correct'
-      };
-    }
+    this.store$.dispatch(
+      new authActions.LoginAction(value));
   }
 
 }

@@ -1,9 +1,9 @@
 <mat-toolbar color="primary">
-  <button mat-icon-button (click)="openSidebar()">
+      <button mat-icon-button (click)="onClick()" *ngIf="auth">
     <mat-icon>menu</mat-icon>
   </button>
-  <!--<mat-icon svgIcon="add"></mat-icon>-->
   <span>企业协作平台</span>
   <span class="fill-remaining-space"></span>
   <mat-slide-toggle (change)="onChange($event.checked)">夜间模式</mat-slide-toggle>
+      <span><a mat-button *ngIf="auth" (click)="handleLogout()">退出</a></span>
 </mat-toolbar>

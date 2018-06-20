@@ -1,5 +1,8 @@
 import {ChangeDetectionStrategy, Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
+import {Observable} from 'rxjs/Observable';
+import {TaskList} from '../../domain';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-copy-task',
@@ -9,17 +12,29 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 })
 export class CopyTaskComponent implements OnInit {
 
-  lists: any[];
+  form: FormGroup;
+  dialogTitle: string;
+  lists$: Observable<TaskList>;
 
-  constructor(@Inject(MAT_DIALOG_DATA) protected data,
-              protected dialogRef: MatDialogRef<CopyTaskComponent>) {
+  constructor(private fb: FormBuilder,
+              @Inject(MAT_DIALOG_DATA) private data: any,
+              private dialogRef: MatDialogRef<CopyTaskComponent>) {
   }
 
   ngOnInit() {
-    this.lists = this.data.lists;
+    this.lists$ = this.data.lists;
+    this.dialogTitle = '移动所有任务';
+    this.form = this.fb.group({
+      targetList: ['', Validators.required]
+    });
   }
 
-  onClick() {
+  onSubmit({value, valid}: FormGroup, ev: Event) {
+    ev.preventDefault();
+    if (!valid) {
+      return;
+    }
+    this.dialogRef.close({srcListId: this.data.srcListId, targetListId: value.targetList});
   }
 
 }

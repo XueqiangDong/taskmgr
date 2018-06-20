@@ -1,25 +1,23 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
 
-  @Output()
-  toggle = new EventEmitter<void>();
-  @Output()
-  toggleTheme = new EventEmitter<boolean>();
+  @Input() auth = false;
+  @Output() toggle = new EventEmitter<void>();
+  @Output() toggleTheme = new EventEmitter<boolean>();
+  @Output() logout = new EventEmitter();
 
-  constructor() {
-  }
-
-  ngOnInit() {
-  }
-
-  openSidebar() {
+  onClick() {
     this.toggle.emit();
+  }
+
+  handleLogout() {
+    this.logout.emit();
   }
 
   onChange(checked: boolean) {

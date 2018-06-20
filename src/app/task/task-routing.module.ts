@@ -1,9 +1,12 @@
 import {NgModule} from '@angular/core';
-import {Routes, RouterModule} from '@angular/router';
-import {TaskHomeComponent} from './task-home/task-home.component';
+import {RouterModule, Routes} from '@angular/router';
+import {TaskHomeComponent} from './task-home';
 
 const routes: Routes = [
-  {path: 'tasklists', component: TaskHomeComponent},
+  {
+    path: '',
+    component: TaskHomeComponent,
+  }
 ];
 
 @NgModule({

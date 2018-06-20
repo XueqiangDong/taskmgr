@@ -19,7 +19,35 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "styles.scss"
+        "styles.scss",
+        "../node_modules/angular-calendar/scss/angular-calendar.scss"
+      ],
+      "scripts": [],
+      "environmentSource": "environments/environment.ts",
+      "environments": {
+        "dev": "environments/environment.ts",
+        "hmr": "environments/environment.hmr.ts",
+        "prod": "environments/environment.prod.ts"
+      }
+    },
+    {
+      "name": "taskmgr",
+      "platform": "server",
+      "root": "src",
+      "outDir": "dist/server",
+      "assets": [
+        "assets",
+        "favicon.ico"
+      ],
+      "index": "index.html",
+      "main": "main.server.ts",
+      "test": "test.ts",
+      "tsconfig": "tsconfig.server.json",
+      "testTsconfig": "tsconfig.spec.json",
+      "prefix": "app",
+      "styles": [
+        "styles.scss",
+        "../node_modules/angular-calendar/scss/angular-calendar.scss"
       ],
       "scripts": [],
       "environmentSource": "environments/environment.ts",

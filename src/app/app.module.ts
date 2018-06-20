@@ -4,11 +4,11 @@ import {AppRoutingModule} from './app-routing.module';
 import {CoreModule} from './core/core.module';
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {SharedModule} from './shared/shared.module';
-import {LoginModule} from './login/login.module';
-import {ProjectModule} from './project/project.module';
+import {SharedModule} from './shared';
+import {LoginModule} from './login';
+import {ProjectModule} from './project';
 import {MatDialog} from '@angular/material';
-import {TaskModule} from './task/task.module';
+import {TaskModule} from './task';
 import {QuoteService} from './services/quote.service';
 
 @NgModule({

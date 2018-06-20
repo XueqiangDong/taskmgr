@@ -6,6 +6,9 @@ import {extractInfo, getAddrByCode, isValidAddr} from '../../utils/identity.util
 import {isValidDate} from '../../utils/date.util';
 import { range } from 'rxjs/observable/range';
 import { map, reduce, debounceTime, filter } from 'rxjs/operators';
+import {Store} from '@ngrx/store';
+import * as fromRoot from '../../reducers';
+import * as actions from '../../actions/auth.action';
 
 @Component({
   selector: 'app-register',
@@ -21,8 +24,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
   private _sub: Subscription;
   private readonly avatarName = 'avatars';
 
-  constructor(protected fb: FormBuilder) {
-              // protected store$: Store<fromRoot.State>) {
+  constructor(private fb: FormBuilder,
+              private store$: Store<fromRoot.State>) {
 
     this.avatars$ = range(1, 16)
       .pipe(
@@ -81,17 +84,17 @@ export class RegisterComponent implements OnInit, OnDestroy {
     if (!valid) {
       return;
     }
-    // this.store$.dispatch(
-    //   new actions.RegisterAction({
-    //     id: undefined,
-    //     password: value.password,
-    //     name: value.name,
-    //     email: value.email,
-    //     avatar: value.avatar,
-    //     identity: value.identity,
-    //     address: value.address,
-    //     dateOfBirth: value.dateOfBirth
-    //   }));
+    this.store$.dispatch(
+      new actions.RegisterAction({
+        id: undefined,
+        password: value.password,
+        name: value.name,
+        email: value.email,
+        avatar: value.avatar,
+        identity: value.identity,
+        address: value.address,
+        dateOfBirth: value.dateOfBirth
+      }));
   }
 
   prevTab() {

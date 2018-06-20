@@ -1,16 +1,41 @@
 import {NgModule} from '@angular/core';
-import {Routes, RouterModule} from '@angular/router';
+import {RouterModule, Routes} from '@angular/router';
+import {AuthGuardService} from './services';
+import {PageNotFoundComponent} from './core/containers/page-not-found';
+import {LoginComponent} from './login/login/login.component';
 
 const routes: Routes = [
-  // {path: '', redirectTo: '/login', pathMatch: 'full'},
-  // {path: '', redirectTo: '/project', pathMatch: 'full'},
-  {path: '', redirectTo: '/login', pathMatch: 'full'},
-  {path: 'project', redirectTo: '/project', pathMatch: 'full'},
-  {path: 'tasklist', redirectTo: '/tasklists', pathMatch: 'full'},
+  // {
+  //   path: '',
+  //   redirectTo: '/login',
+  //   pathMatch: 'full'
+  // },
+  {
+    path: '', component: LoginComponent
+  },
+  {
+    path: 'projects',
+    loadChildren: 'app/project#ProjectModule',
+    pathMatch: 'full',
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'tasklists/:id',
+    loadChildren: 'app/task#TaskModule',
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'mycal/:view',
+    loadChildren: 'app/my-calendar#MyCalendarModule',
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: '**', component: PageNotFoundComponent
+  }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {useHash: true})],
   exports: [RouterModule]
 })
 export class AppRoutingModule {

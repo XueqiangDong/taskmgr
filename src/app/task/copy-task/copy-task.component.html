@@ -1,12 +1,16 @@
-<form>
-  <h2 mat-dialog-title>移动本列表所有内容</h2>
-  <div mat-dialog-content>
-    <mat-select placeholder="请选择目标列表">
-      <mat-option *ngFor="let list of lists" [value]="list">{{list.name}}</mat-option>
-    </mat-select>
-  </div>
-  <div mat-dialog-actions>
-    <button type="button" mat-raised-button color="primary" (click)="onClick()">保存</button>
-    <button type="button" mat-raised-button mat-dialog-close>关闭</button>
+<form [formGroup]="form" (ngSubmit)="onSubmit(form, $event)">
+  <span matDialogTitle>{{ dialogTitle }}</span>
+  <div matDialogContent>
+    <mat-form-field>
+      <mat-select placeholder="选择目标列表" formControlName="targetList" class="full-width">
+        <mat-option *ngFor="let list of lists$ | async" [value]="list.id">
+          {{ list.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div matDialogActions>
+      <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid">确定</button>
+      <button matDialogClose mat-raised-button type="button">关闭</button>
+    </div>
   </div>
 </form>

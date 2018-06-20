@@ -1,42 +1,73 @@
 import {NgModule, Optional, SkipSelf} from '@angular/core';
+import {HttpClientModule} from '@angular/common/http';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatIconRegistry, DateAdapter, MAT_DATE_FORMATS, MatDatepickerIntl, MAT_DATE_LOCALE} from '@angular/material';
+import {MomentDateAdapter} from '@angular/material-moment-adapter';
+import {DomSanitizer} from '@angular/platform-browser';
+import {RouterStateSerializer} from '@ngrx/router-store';
+
+import {SharedModule} from '../shared';
+import {AppRoutingModule} from '../app-routing.module';
+import {AppEffectsModule} from '../effects';
+import {ServicesModule} from '../services';
+import {AppStoreModule} from '../reducers';
+
 import {HeaderComponent} from './header/header.component';
 import {FooterComponent} from './footer/footer.component';
 import {SidebarComponent} from './sidebar/sidebar.component';
-import {HttpModule} from '@angular/http';
-import {DomSanitizer} from '@angular/platform-browser';
+import {PageNotFoundComponent} from './containers/page-not-found';
+import {AppComponent} from './containers/app';
+
 import {loadSvgResources} from '../utils/svg.util';
-import {SharedModule} from '../shared/shared.module';
-import {MatIconRegistry} from '@angular/material';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import 'hammerjs';
-import {RouterModule} from '@angular/router';
-import 'rxjs/add/operator/take';
-import {HttpClientModule} from '@angular/common/http';
+import {DatepickerI18n} from '../shared/adapters/datepicker-i18n';
+import {MD_FNS_DATE_FORMATS} from '../shared/adapters/date-formats';
+import {CustomRouterStateSerializer} from '../utils/router.util';
 import '../utils/debug.util';
 
 @NgModule({
   imports: [
-    HttpModule, SharedModule, BrowserAnimationsModule, RouterModule, HttpClientModule
+    SharedModule,
+    HttpClientModule,
+    AppEffectsModule,
+    ServicesModule.forRoot(),
+    AppStoreModule,
+    AppRoutingModule,
+    BrowserAnimationsModule
   ],
   exports: [
-    HeaderComponent, FooterComponent, HttpModule, SharedModule, SidebarComponent, HttpClientModule
+    AppComponent,
+    AppRoutingModule, SidebarComponent, FooterComponent, HeaderComponent
   ],
-  declarations: [HeaderComponent, FooterComponent, SidebarComponent
+  providers: [
+    {provide: 'BASE_CONFIG', useValue: { uri: 'http://localhost:3002'}},
+    {provide: MAT_DATE_LOCALE, useValue: 'zh-CN'},
+    {provide: DateAdapter, useClass: MomentDateAdapter},
+    {provide: MAT_DATE_FORMATS, useValue: MD_FNS_DATE_FORMATS},
+    {provide: MatDatepickerIntl, useClass: DatepickerI18n},
+    /**
+     * The `RouterStateSnapshot` provided by the `Router` is a large complex structure.
+     * A custom RouterStateSerializer is used to parse the `RouterStateSnapshot` provided
+     * by `@ngrx/router-store` to include only the desired pieces of the snapshot.
+     */
+    { provide: RouterStateSerializer, useClass: CustomRouterStateSerializer },
   ],
-  providers:[
-    {
-      provide: 'BASE_CONFIG', useValue: {
-        uri: 'http://localhost:3000'
-      }
-    }
+  declarations: [
+    HeaderComponent,
+    FooterComponent,
+    SidebarComponent,
+    PageNotFoundComponent,
+    AppComponent
   ]
 })
 export class CoreModule {
-  constructor(@Optional() @SkipSelf() parent: CoreModule,
-              ir: MatIconRegistry, ds: DomSanitizer) {
-    if (parent) {
-      throw new Error('模块已经存在，不能再次加载');
+
+  constructor(
+    @Optional() @SkipSelf() parentModule: CoreModule,
+    iconRegistry: MatIconRegistry,
+    sanitizer: DomSanitizer) {
+    if (parentModule) {
+      throw new Error('CoreModule 已经装载，请仅在 AppModule 中引入该模块。');
     }
-    loadSvgResources(ir, ds);
+    loadSvgResources(iconRegistry, sanitizer);
   }
 }

@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, forwardRef, OnInit, OnDestroy} from '@angular/core';
+import {Component, forwardRef, OnInit, OnDestroy} from '@angular/core';
 import {ControlValueAccessor, FormControl, NG_VALIDATORS, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {Subject} from 'rxjs/Subject';
 import {Observable} from 'rxjs/Observable';

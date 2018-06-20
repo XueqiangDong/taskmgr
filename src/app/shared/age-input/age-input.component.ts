@@ -3,7 +3,7 @@ import {
   ControlValueAccessor,
   FormBuilder,
   FormControl,
-  FormGroup,
+  FormGroup, NG_VALIDATORS,
   NG_VALUE_ACCESSOR,
 } from '@angular/forms';
 import {
@@ -42,11 +42,11 @@ export interface Age {
       useExisting: forwardRef(() => AgeInputComponent),
       multi: true
     },
-    // {
-      // provide: NG_VALIDATORS,
-    //   useExisting: forwardRef(() => AgeInputComponent),
-    //   multi: true,
-    // }
+    {
+      provide: NG_VALIDATORS,
+      useExisting: forwardRef(() => AgeInputComponent),
+      multi: true,
+    }
   ]
 })
 export class AgeInputComponent implements OnInit, ControlValueAccessor, OnDestroy {
