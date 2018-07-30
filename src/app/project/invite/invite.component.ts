@@ -29,6 +29,6 @@ export class InviteComponent implements OnInit {
       return;
     }
     this.dialogRef.close(this.members);
+    // 没有
   }
-
 }
